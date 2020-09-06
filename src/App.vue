@@ -2,6 +2,8 @@
   <div class="test">
     <!-- initiate Navbar -->
     <NavBar />
+
+    <!-- create column and center it for main content -->
     <div class="columns is-mobile is-centered pt-5 ">
       <div class="column is-8">
         <div> 
@@ -12,13 +14,18 @@
             :gutter-height="20"
             :monitor-images-loaded="true"
           >
+          <!-- use vue library vue-grid-stack for stacking cards automatically -->
             <stack-item v-for="(data, index) in comicData" :key="index">
               <div class="card has-text-centered">
                 <div class="card-image pt-5">
                   <figure class="pt-5">
+
+                    <!-- check is page is loading -->
                     <div v-if="loading">
                       <img class="image-round is-loading" src="loading.gif" />
                     </div>
+
+                    <!-- if page loaded create cards and add image,claps -->
                     <div v-else>
                       <div class="columns pl-1">
                         <div class="column has-text-centered is-1 ">
@@ -50,6 +57,8 @@
           </stack>
         </div>
       </div>
+      
+      <!-- create single modal and bind with current selection-->
       <b-modal v-model="currentselection">
         <div class="card">
           <div class="card-image">
@@ -57,6 +66,7 @@
               <img v-bind:src="modalImage" alt="Placeholder image" />
             </figure>
           </div>
+          <!-- define modal content -->
           <div class="card-content">
             <div class="media">
               <div class="media-content">
@@ -88,6 +98,7 @@
       </b-modal>
     </div>
 
+    <!-- add reload button at the end -->
     <div class="columns is-centered is-vcentered is-fullhd pt-5 pb-5">
       <div v-if="buttonLoading" class="column is-narrow has-text-centered">
         <b-button
@@ -139,6 +150,7 @@ export default {
     };
   },
   methods: {
+    //method to fetch comic from proxy
     fetchComic() {
       this.buttonLoading = true;
       this.loading = true;
@@ -181,12 +193,15 @@ export default {
         });
     },
 
+    //increment rating at local state
     incrementRating() {
       this.ratings += 1;
     },
+    //decrement rating at local state
     decrementRating() {
       this.ratings -= 1;
     },
+    //launch modal and grab data from current selection
     launchModal(index, image, data) {
       this.currentselection = true;
       this.modalImage = data.img;
@@ -198,16 +213,22 @@ export default {
       this.modalNumber = data.num;
     },
   },
+  //grab comics data before mounting to page
   beforeMount() {
     this.fetchComic();
   },
+  //initial VUEX implementation for state management *has not been completed yet
   mounted() {
     this.comicData = this.$store.getters.getComicData;
   },
 };
 </script>
 
+
+
+
 <style>
+/* ****ALL THE FANCY IS HERE**** */
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
