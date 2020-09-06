@@ -1,5 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 import HelloWorld from "@/components/HelloWorld.vue";
+import Navbar from "@/components/Navbar.vue";
 
 describe("HelloWorld.vue", () => {
   it("renders props.msg when passed", () => {
@@ -10,3 +11,10 @@ describe("HelloWorld.vue", () => {
     expect(wrapper.text()).toMatch(msg);
   });
 });
+
+describe('Navbar.vue', () => {
+  it('renders a div', () => {
+    const wrapper = shallowMount(Nav)
+    expect(wrapper.contains('div')).toBe(true)
+  })
+})
