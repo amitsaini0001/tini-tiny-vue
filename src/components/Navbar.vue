@@ -1,5 +1,6 @@
 <template>
     <b-navbar class="is-white" :fixed-top="true" :shadow="true">
+        <!-- basic navbar with links -->
         <template slot="brand">
             <b-navbar-item>
                 <img src="../assets/tiny.svg" alt="Tini-Tiny">
